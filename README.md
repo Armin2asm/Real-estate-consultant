@@ -1,4 +1,4 @@
-# 🏠 Real State Consultant
+# 🏠 Real Estate Consultant
 
 A web-based Real Estate Consultant application built with **Django**.
 
