@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Our Agents" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-3">
+        {% trans "Our Real Estate Agents" %}
+    </h2>
+
+    <p class="text-center text-muted mb-5">
+        {% trans "Meet our professional real estate agents. Here you can view their personal information and contact details." %}
+    </p>
+
+    <div class="row">
+
+        {% for item in agents %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card shadow h-100">
+
+                {% if item.profile %}
+                    <img src="{{ item.profile.url }}"
+                         class="card-img-top"
+                         style="height:300px; object-fit:cover;"
+                         alt="{% trans 'Agent Profile' %}">
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        {{ item.name }} {{ item.last_name }}
+                    </h5>
+
+                    <p class="mb-2">
+                        <strong>{% trans "Gender" %}:</strong>
+                        {{ item.gender }}
+                    </p>
+
+                    <p class="mb-0">
+                        <strong>{% trans "Age" %}:</strong>
+                        {{ item.age }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                {% trans "No agents found." %}
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

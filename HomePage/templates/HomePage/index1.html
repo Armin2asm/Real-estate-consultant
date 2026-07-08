@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Home Page" %}
+{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center fw-bold text-primary mb-5">
+    {% trans "Latest Properties" %}
+</h2>
+        <div class='Add_property_Button'>
+
+                    <a href="{% url 'properties:add_property' %}" class="btn btn-warning text-dark fw-bold">
+                        {% trans "Add A New Real Estate " %}
+                    </a>
+                </div>
+<div class="row">
+                   
+              
+    {% for property in property_list %}
+
+    <div class="col-lg-4 col-md-6 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body">
+
+                <h5 class="fw-bold">
+                    {{ property.title }}
+                </h5>
+
+                <p>
+                    <strong>{% trans "City:" %}</strong>
+                    {{ property.city }}
+                </p>
+
+                <p>
+                    <strong>{% trans "Type:" %}</strong>
+                    {{ property.get_property_type_display }}
+                </p>
+
+                <p>
+                    <strong>{% trans "Area:" %}</strong>
+                    {{ property.area }} m²
+                </p>
+
+                {% if property.sale_price %}
+                <p class="text-success fw-bold">
+                    {{ property.sale_price }}
+                </p>
+                {% endif %}
+
+                <a href="{% url 'properties:property_detail' property.pk %}"
+                   class="btn btn-primary w-100">
+                    {% trans "View Details" %}
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            {% trans "No properties found." %}
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+
+                <div name='Add_Agent_Button' > 
+                    <a href="{% url 'agents:add_agent' %}" class="btn btn-warning text-dark fw-bold">
+                        {% trans "Add a new  Agent " %}
+                    </a>
+                </div>
+<h2 class="text-center fw-bold text-success mb-5">
+    {% trans "Latest Agents" %}
+</h2>
+
+<div class="row">
+
+    {% for agent in agents %}
+
+    <div class="col-lg-4 col-md-6 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-body text-center">
+
+                {% if agent.profile %}
+                    <img src="{{ agent.profile.url }}"
+                         class="img-fluid rounded mb-3"
+                         style="height:220px; object-fit:cover;">
+                {% endif %}
+
+                <h5>{{ agent.name }} {{ agent.last_name }}</h5>
+
+                <p>{{ agent.gender }}</p>
+
+                <p>{{ agent.age }}</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            {% trans "No agents found." %}
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+<!-- Dashboard -->
+<div class="container mt-5">
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- Accounts -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card dashboard-card h-100">
+                <div class="card-body text-center">
+
+                    <i class="fa-solid fa-user fa-3x text-primary mb-3"></i>
+
+                    <h3>{% trans "Accounts" %}</h3>
+
+                    <p>
+                        {% trans "Manage user accounts, authentication and permissions." %}
+                    </p>
+
+                    <a href="{% url 'account:contact' %}" class="btn btn-primary">
+                        {% trans "Enter" %}
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+        
+
+        <!-- Agents -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card dashboard-card h-100">
+                <div class="card-body text-center">
+
+                    <i class="fa-solid fa-users fa-3x text-success mb-3"></i>
+
+                    <h3>{% trans "Agents" %}</h3>
+
+                    <p>
+                        {% trans "Browse and manage professional real estate agents." %}
+                    </p>
+
+                    <a href="{% url 'agents:agents' %}" class="btn btn-success">
+                        {% trans "Enter" %}
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Properties -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card dashboard-card h-100">
+                <div class="card-body text-center">
+
+                    <i class="fa-solid fa-house fa-3x text-warning mb-3"></i>
+
+                    <h3>{% trans "Properties" %}</h3>
+
+                    <p>
+                        {% trans "View, add and manage available real estate properties." %}
+                    </p>
+
+                    <a href="{% url 'properties:property_list' %}" class="btn btn-warning text-dark fw-bold">
+                        {% trans "Enter" %}
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

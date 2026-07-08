@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>{{ property.title }}</h2>
+
+    <p><strong>City:</strong> {{ property.city }}</p>
+
+    <p><strong>Address:</strong> {{ property.address }}</p>
+
+    <p><strong>Area:</strong> {{ property.area }} m²</p>
+
+    <p><strong>Owner:</strong> {{ property.owner_name }}</p>
+
+    <p><strong>Price:</strong> {{ property.sale_price }}</p>
+    
+<div class="row mb-4">
+
+{% for image in property.images.all %}
+
+<div class="col-md-4 mb-3">
+
+    <img
+        src="{{ image.image.url }}"
+        class="img-fluid rounded shadow"
+        style="height:250px; width:100%; object-fit:cover;">
+
+</div>
+
+{% empty %}
+
+<p>No images uploaded.</p>
+
+{% endfor %}
+
+</div>
+
+    <p>{{ property.description }}</p>
+
+</div>
+
+{% endblock %}
