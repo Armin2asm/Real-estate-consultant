@@ -1,3 +1,6 @@
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Django](https://img.shields.io/badge/Django-5.x-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 # 🏠 Real Estate Consultant
 
 A web-based Real Estate Consultant application built with **Django**.
